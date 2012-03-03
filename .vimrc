@@ -37,7 +37,7 @@ endif
 " I like english VIM :)
 set langmenu=en_US.UTF-8
 if has('unix')
-	language messages C
+    language messages C
 else
 	language messages en
 endif
@@ -51,9 +51,10 @@ endif
 set scrolloff=3
 
 " Set tabsize
-set ts=4
-set shiftwidth=4
-set softtabstop=4
+set ts=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
 " Set hidden
 set hidden
@@ -62,9 +63,6 @@ set hidden
 set wildmenu
 " set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.jpg,*.gif,*.png
 set wildmode=list:longest
-"
-" Pathogen stuff
-call pathogen#infect('bundles')
 
 " Set indent
 filetype indent plugin on
@@ -73,20 +71,20 @@ set smartindent
 " Syntax highlightning and default theme.
 syntax on
 
+" Dark background
+" set background=dark
+
+" Pathogen stuff
+call pathogen#infect('bundles')
 
 if has("gui_running")
-"	colorscheme summerfruit256
-"	colorscheme desertEx
-	set background=dark
-	colorscheme solarized
+  "colorscheme desertEx
+  colorscheme railscasts2
+	"colorscheme solarized
+	"colorscheme inkpot
 else
-	"colorscheme tabula
-	"colorscheme wombat256
 	"colorscheme xoria256
 	"colorscheme zenburn
-	"colorscheme herald
-	"colorscheme jellybeans
-	"colorscheme inkpot
 	colorscheme kellys
 	"colorscheme lucius
 	"colorscheme mustang
@@ -107,13 +105,13 @@ set guioptions=c
 map <F3> <ESC>:NERDTreeToggle<RETURN>
 
 " Shorten messages (disable "Press enter...")
-set shortmess=at
+set shortmess=atI
 
 " Zen coding rebind
 let g:user_zen_expandabbr_key = '<Leader>,'
 
 " Line height (gui only)
-set linespace=6
+set linespace=2
 
 " Set guifont to ubuntu mono 12
 " Yeah, I like it
@@ -134,5 +132,17 @@ set cpoptions+=$
 set guiheadroom=0
 
 " I luv statusline
-set statusline=%f%m%y%r%h%=%q%=%([%l,%c][%P]%)
+" But now I use powerline, it's AWESOME!
+" So doesn't need this anymore.
+" set statusline=%f%m%y%r%h%=%q%=%([%l,%c][%P]%)
+
 set laststatus=2
+
+" Plugins stuff
+
+" Powerline stuff
+let g:Powerline_symbols="fancy"
+
+" XPT Stuff
+" Tab mapping
+let g:xptemplate_key = "<Tab>"
