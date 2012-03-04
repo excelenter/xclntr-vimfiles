@@ -145,4 +145,17 @@ let g:Powerline_symbols="fancy"
 
 " XPT Stuff
 " Tab mapping
-let g:xptemplate_key = "<Tab>"
+let g:xptemplate_key = "<S-Space>"
+
+" Supertab Stuff
+" No completion before/after:
+"let g:SuperTabNoCompleteAfter = [',', '\s', '\t', '"', "'"]
+
+" INSTEAD stuff
+"let g:InsteadWindowPosition = "left"
+"let g:InsteadRoomsKey       = "<c-r>"
+"let g:InsteadObjsKey        = "<F6>"
+"let g:InsteadDlgsKey        = "<F7>"
+"let g:InsteadRoomToken      = "iroom"
+"let g:InsteadObjToken       = "iobj"
+"let g:InsteadDlgToken       = "idlg"

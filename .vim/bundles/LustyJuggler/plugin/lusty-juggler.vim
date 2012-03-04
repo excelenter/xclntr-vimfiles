@@ -579,6 +579,12 @@ class LustyJuggler
       map_key("v", ":call <SID>LustyJugglerKeyPressed('v')<CR>")
       map_key("b", ":call <SID>LustyJugglerKeyPressed('b')<CR>")
 
+      # Left and Right keys
+      map_key("<Esc>OD", ":call <SID>LustyJugglerKeyPressed('Left')<CR>")
+      map_key("<Esc>OC", ":call <SID>LustyJugglerKeyPressed('Right')<CR>")
+      map_key("<Left>",  ":call <SID>LustyJugglerKeyPressed('Left')<CR>")
+      map_key("<Right>", ":call <SID>LustyJugglerKeyPressed('Right')<CR>")
+
       # Cancel keys.
       map_key("i", ":call <SID>LustyJugglerCancel()<CR>")
       map_key("q", ":call <SID>LustyJugglerCancel()<CR>")
@@ -603,6 +609,14 @@ class LustyJuggler
       elsif @last_pressed and %w(v b).include?(c)
         c=='v' ? vsplit(@last_pressed) : hsplit(@last_pressed)
         cleanup()
+      elsif c == 'Left'
+        @last_pressed = (@last_pressed.nil?) ? 0 : (@last_pressed)
+        @last_pressed = (@last_pressed - 1) < 1 ? $lj_buffer_stack.length : (@last_pressed - 1)
+        print_buffer_list(@last_pressed)
+      elsif c == 'Right'
+        @last_pressed = (@last_pressed.nil?) ? 0 : (@last_pressed)
+        @last_pressed = (@last_pressed + 1) > $lj_buffer_stack.length ? 1 : (@last_pressed + 1)
+        print_buffer_list(@last_pressed)
       else
         @last_pressed = @@KEYS[c]
         print_buffer_list(@last_pressed)
