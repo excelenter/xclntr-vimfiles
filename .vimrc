@@ -1,5 +1,79 @@
-" Vim settings!
-set nocompatible
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+" TODO: clean unused bundles
+" Awesome bundles by Tim Pope!
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-repeat'
+
+" EPIC bundles by scrooloose
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
+
+" All web stuff
+Bundle 'mattn/zencoding-vim'
+Bundle 'CSS-one-line--multi-line-folding'
+Bundle 'jQuery'
+
+" Completion, snippets, etc
+Bundle 'drmingdrmer/xptemplate'
+Bundle 'ervandew/supertab'
+
+" Aligning, numbering
+Bundle 'VisIncr'
+Bundle 'Align'
+
+" Window twiggling
+Bundle 'ZoomWin'
+
+" FuzzyFinder
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+
+" Organization stuff (vimwiki, etc)
+Bundle 'vimwiki'
+Bundle 'mattn/calendar-vim'
+
+" Fancy stuff
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'nathanaelkane/vim-indent-guides'
+
+" Twitter, WP
+Bundle 'TwitVim'
+
+" Colorscheme tools
+Bundle 'Color-Sampler-Pack'
+Bundle 'ScrollColors'
+
+" Python stuff
+Bundle 'Python-2.x-Standard-Library-Reference'
+Bundle 'Python-3.x-Standard-Library-Reference'
+
+" Session management
+Bundle 'xolox/vim-session'
+
+" Buffer juggling
+Bundle 'bufexplorer.zip'
+
+" Other bundles
+Bundle 'Raimondi/delimitMate'
+Bundle 'matchit.zip'
+Bundle 'TaskList.vim'
+Bundle 'closetag.vim'
+Bundle 'excelenter/vim-instead'
+
+" Required
+filetype plugin indent on
 
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -8,23 +82,18 @@ set backspace=indent,eol,start
 set nobackup
 
 " Set command line history
-set history=50
+set history=100
 
-" Set ruler and show uncomplete commands.  set ruler
+" Show uncomplete commands.
 set showcmd
 
-" Straight slashes 
+" Straight slashes everytime
 set shellslash
 
 " Searching features.
 set incsearch
 set ignorecase
 set smartcase
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -33,11 +102,14 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" Some rat poison
+set mouse=
+
 " Language settings.
 " I like english VIM :)
 set langmenu=en_US.UTF-8
 if has('unix')
-    language messages C
+	language messages C
 else
 	language messages en
 endif
@@ -51,45 +123,32 @@ endif
 set scrolloff=3
 
 " Set tabsize
+" Somehow I moved to 2 spaces indent
 set ts=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+set sw=2
+set sts=2
+set et
 
-" Set hidden
+" Enable buffer hiding
 set hidden
 
 " Wildmenu settings
 set wildmenu
-" set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.jpg,*.gif,*.png
+set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.jpg,*.gif,*.png
 set wildmode=list:longest
 
+" Splits stuff
+set splitright
+set splitbelow
+
 " Set indent
-filetype indent plugin on
 set smartindent
+
+" Round indent to multiple of shiftwidth
+set sr
 
 " Syntax highlightning and default theme.
 syntax on
-
-" Dark background
-" set background=dark
-
-" Pathogen stuff
-call pathogen#infect('bundles')
-
-if has("gui_running")
-  "colorscheme desertEx
-  colorscheme railscasts2
-	"colorscheme solarized
-	"colorscheme inkpot
-else
-	"colorscheme xoria256
-	"colorscheme zenburn
-	colorscheme kellys
-	"colorscheme lucius
-	"colorscheme mustang
-	"colorscheme summerfruit256
-endif
 
 " I don't like wordwrap in code files
 set nowrap
@@ -101,29 +160,25 @@ set cursorline
 " But I luv nice smooooooth fonts :)
 set guioptions=c
 
-" Map <F3> to open NERDTree
-map <F3> <ESC>:NERDTreeToggle<RETURN>
-
-" Shorten messages (disable "Press enter...")
-set shortmess=atI
-
-" Zen coding rebind
-let g:user_zen_expandabbr_key = '<Leader>,'
+" Shorten messages (disable "Press enter..." if possible)
+set shortmess=at
 
 " Line height (gui only)
-set linespace=2
+set linespace=6
 
 " Set guifont to ubuntu mono 12
-" Yeah, I like it
 set guifont=Ubuntu\ Mono\ 12
 
-" Set numbers to decimal
+" Set numbers to hex
 " I don't use octal numbers,
 " but I use 001, 002, 003, etc
 set nrformats=hex
 
-" Lazy redraw 
+" Lazy redraw (speed!)
 set lazyredraw
+
+" Turn off goddamn beeping
+set novb
 
 " Put $ on the end of the line when changing
 set cpoptions+=$
@@ -131,31 +186,76 @@ set cpoptions+=$
 " No headroom for gui
 set guiheadroom=0
 
-" I luv statusline
-" But now I use powerline, it's AWESOME!
-" So doesn't need this anymore.
-" set statusline=%f%m%y%r%h%=%q%=%([%l,%c][%P]%)
-
+" Always show statusline
 set laststatus=2
 
-" Plugins stuff
+if has("gui_running")
+	" Set nice gui colorscheme
+  colorscheme mustang
+	" Set fancy symbols in powerline
+	let g:Powerline_symbols="fancy"
+else
+	colorscheme wombat256
+	let g:Powerline_symbols="compatible"
+endif
 
-" Powerline stuff
-let g:Powerline_symbols="fancy"
+" Tabline tweaks
+" --------------
+" TODO: set tabline to show tab numbers
 
-" XPT Stuff
-" Tab mapping
-let g:xptemplate_key = "<S-Space>"
+" Always show tabline
+set showtabline=2
 
-" Supertab Stuff
-" No completion before/after:
-"let g:SuperTabNoCompleteAfter = [',', '\s', '\t', '"', "'"]
+" Personal bindings start 
+" -----------------------
+" TODO: refine old keybindings
 
-" INSTEAD stuff
-"let g:InsteadWindowPosition = "left"
-"let g:InsteadRoomsKey       = "<c-r>"
-"let g:InsteadObjsKey        = "<F6>"
-"let g:InsteadDlgsKey        = "<F7>"
-"let g:InsteadRoomToken      = "iroom"
-"let g:InsteadObjToken       = "iobj"
-"let g:InsteadDlgToken       = "idlg"
+" Zen coding rebind
+let g:user_zen_expandabbr_key = '<Leader><Leader>'
+
+" XPT mappings
+let g:xptemplate_key = '<S-Space>'
+
+" Map gn to open NERDTree
+noremap <silent> gn <ESC>:NERDTreeToggle<RETURN>
+
+" Map gb to open bufexplorer
+noremap <silent> gb <ESC>:BufExplorer<RETURN>
+noremap <silent> gB <ESC>:BufExplorerVerticalSplit<RETURN>
+noremap <silent> ghb <ESC>:BufExplorerHorizontalSplit<RETURN>
+
+" Map gc to :close
+noremap <silent> gc <ESC>:close<CR>
+
+" moving lines
+nnoremap <A-j> :m+<CR>==
+nnoremap <A-k> :m-2<CR>==
+inoremap <A-j> <Esc>:m+<CR>==gi 
+inoremap <A-k> <Esc>:m-2<CR>==gi
+vnoremap <A-j> :m'>+<CR>gv=gv
+vnoremap <A-k> :m-2<CR>gv=gv
+
+" Bind ,; to , (inverse last search)
+noremap ,; ,
+
+" Tabs stuff
+nnoremap <silent> ,t <ESC>:tab split<CR>
+vnoremap <silent> ,t <ESC>:tab split<CR>gv
+noremap <silent> ,c <ESC>:tabclose<CR>
+
+" Buffers wiping
+noremap <silent> ,d <ESC>:bd<CR>
+noremap <silent> ,D <ESC>:bd!<CR>
+
+" Other mappings
+nnoremap ,s :%s//gc<Left><Left><Left>
+vnoremap ,s :s//gc<Left><Left><Left>
+nnoremap ,w :TaskList<CR>
+nnoremap ,v :e ~/.vim/.vimrc<CR>
+
+" Delimitmate settings
+let g:delimitMate_expand_space = 1
+
+inoremap <expr> <CR> delimitMate#WithinEmptyPair() ?
+      \ "\<C-R>=delimitMate#ExpandReturn()\<CR>" :
+      \ "\<CR>"
