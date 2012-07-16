@@ -1,0 +1,9 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2595
+
+Used the molokai color scheme as a template to build off then completely recolored almost everything to be a bit more colorful while still being quite readable.
+
+http://shawnbiddle.com/devblog/archive/skittles-dark-a-vim-colorscheme
+Screenshot (PHP): http://shawnbiddle.com/files/skittles_php.png
+Screenshot (C++): http://shawnbiddle.com/files/skittles_cpp.png
+
+(Note: PHP Docblock highlighting in screenshot from custom php.vim syntax modifications, it will not be enabled by the theme)
